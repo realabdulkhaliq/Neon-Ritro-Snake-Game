@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Pixelify+Sans:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Pixelify Sans", system-ui, sans-serif;
+  --font-mono: "VT323", monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-[#030303] text-cyan-400 antialiased overflow-x-hidden;
+    background-image: 
+      linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+      linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 3px 100%;
+  }
+
+  /* Scanline Effect */
+  body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 9999;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+  }
+}
+
+@layer utilities {
+  .grid-cols-20 {
+    grid-template-columns: repeat(20, minmax(0, 1fr));
+  }
+  .grid-rows-20 {
+    grid-template-rows: repeat(20, minmax(0, 1fr));
+  }
+
+  .text-glitch {
+    text-shadow: 0.05em 0 0 #ff00ff, -0.05em -0.025em 0 #00ffff,
+      -0.025em 0.05em 0 #ff00ff;
+    animation: glitch 500ms infinite;
+  }
+
+  .crt-flicker {
+    animation: flicker 0.15s infinite;
+  }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes flicker {
+  0% { opacity: 0.9; }
+  100% { opacity: 1; }
+}
